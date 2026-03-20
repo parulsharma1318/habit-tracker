@@ -29,8 +29,9 @@ const HabitRow = ({ habit, weekDays }) => {
 </td>
       
       {weekDays.map(day => {
-        const dayData = habit.week.find(d => d.date === day.date)
-        const status = dayData?.status || 'empty'
+       const isCompleted = habit.completedDates?.includes(day.date)
+
+const status = isCompleted ? "completed" : "empty"
         
         return (
           <td key={day.date} className="p-0">
