@@ -5,9 +5,9 @@ const ProgressCard = () => {
   const { habits } = useHabits()
   
   const totalCells = habits.length * 7
-  const completedCells = habits.reduce((acc, habit) => {
-    return acc + habit.week.filter(day => day.status === 'completed').length
-  }, 0)
+ const completedCells = habits.reduce((acc, habit) => {
+  return acc + (habit.completedDates?.length || 0)
+}, 0)
   
   const percentage = totalCells > 0 ? Math.round((completedCells / totalCells) * 100) : 0
 

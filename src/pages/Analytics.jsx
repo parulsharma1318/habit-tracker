@@ -5,12 +5,12 @@ import { getWeekDays } from '../utils/dateUtils'
 const Analytics = () => {
   const { habits } = useHabits()
   
-  const chartData = habits.map(habit => ({
-    name: habit.name,
-    completed: habit.week.filter(day => day.status === 'completed').length,
-    total: 7,
-    streak: habit.streak
-  }))
+ const chartData = habits.map(habit => ({
+  name: habit.name,
+  completed: habit.completedDates?.length || 0,
+  total: 7,
+  streak: habit.streak
+}))
 
   const COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4', '#84cc16']
 

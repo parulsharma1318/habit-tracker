@@ -1,8 +1,9 @@
 import { useHabits } from "../context/HabitContext"
+import { Trash2 } from "lucide-react"
 
 const Notes = () => {
 
-  const { notes, habits } = useHabits()
+  const { notes, habits, deleteNote } = useHabits()
 
   const sortedNotes = Object.entries(notes)
     .sort((a, b) => new Date(b[0]) - new Date(a[0]))
@@ -66,9 +67,20 @@ const Notes = () => {
             className="glass p-6 rounded-2xl space-y-3"
           >
 
-            <div className="text-gray-400 text-sm">
-              {date}
-            </div>
+           <div className="flex justify-between items-center">
+
+          <span className="text-gray-400 text-sm">
+          {date}
+          </span>
+
+             <button
+              onClick={() => deleteNote(date)}
+                className="text-red-400 hover:text-red-500 transition"
+                >
+              <Trash2 size={16} />
+            </button>
+
+          </div>
 
             <div className="text-gray-200">
               {typeof text === "string" ? text : text?.text}

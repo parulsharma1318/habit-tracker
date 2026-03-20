@@ -92,6 +92,15 @@ const habitReducer = (state, action) => {
     notes: {}
   }
 
+  case 'DELETE_NOTE':
+  const updatedNotes = { ...state.notes }
+  delete updatedNotes[action.payload]
+
+  return {
+    ...state,
+    notes: updatedNotes
+  }
+
     case 'LOAD_DATA':
       return action.payload
 
@@ -218,6 +227,13 @@ const clearNotes = () => {
   })
 }
 
+const deleteNote = (date) => {
+  dispatch({
+    type: 'DELETE_NOTE',
+    payload: date
+  })
+}
+
   return (
     <HabitContext.Provider
       value={{
@@ -227,7 +243,8 @@ const clearNotes = () => {
   setNote,
   deleteHabit,
   editHabit,
-  clearNotes
+  clearNotes,
+  deleteNote
 }}
     >
       {children}
