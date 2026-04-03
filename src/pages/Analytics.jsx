@@ -5,9 +5,14 @@ import { getWeekDays } from '../utils/dateUtils'
 const Analytics = () => {
   const { habits } = useHabits()
   
- const chartData = habits.map(habit => ({
+ const weekDays = getWeekDays()
+
+const chartData = habits.map(habit => ({
   name: habit.name,
-  completed: habit.completedDates?.length || 0,
+  completed:
+    habit.completedDates?.filter(date =>
+      weekDays.some(day => day.date === date)
+    ).length || 0,
   total: 7,
   streak: habit.streak
 }))

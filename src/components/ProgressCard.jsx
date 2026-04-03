@@ -1,12 +1,19 @@
 import { useHabits } from '../context/HabitContext'
 import { TrendingUp } from 'lucide-react'
+import { getWeekDays } from '../utils/dateUtils'
 
 const ProgressCard = () => {
   const { habits } = useHabits()
   
+  const weekDays = getWeekDays() 
   const totalCells = habits.length * 7
  const completedCells = habits.reduce((acc, habit) => {
-  return acc + (habit.completedDates?.length || 0)
+  const weeklyCompleted =
+    habit.completedDates?.filter(date =>
+      weekDays.some(day => day.date === date)
+    ).length || 0
+
+  return acc + weeklyCompleted
 }, 0)
   
   const percentage = totalCells > 0 ? Math.round((completedCells / totalCells) * 100) : 0

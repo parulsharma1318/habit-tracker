@@ -27,6 +27,15 @@ const habitReducer = (state, action) => {
     )
   }
 
+  case "SYNC_WEEK":
+  return {
+    ...state,
+    habits: state.habits.map(habit => ({
+      ...habit,
+      week: action.payload
+    }))
+  }
+
     case 'TOGGLE_HABIT':
   const updatedHabits = state.habits.map(habit => {
 
@@ -142,19 +151,19 @@ export const HabitProvider = ({ children }) => {
   })
 
  useEffect(() => {
-
-  const data = localStorage.getItem('habitTracker')
+  const data = localStorage.getItem("habitTracker")
 
   if (data) {
-
     const parsed = JSON.parse(data)
 
     dispatch({
-      type: 'LOAD_DATA',
+      type: "LOAD_DATA",
       payload: parsed
     })
-
   }
+
+  // NEW — sync week
+  syncWeekIfNeeded()
 
 }, [])
 
@@ -231,6 +240,15 @@ const deleteNote = (date) => {
   dispatch({
     type: 'DELETE_NOTE',
     payload: date
+  })
+}
+
+const syncWeekIfNeeded = () => {
+  const currentWeek = getWeekDays()
+
+  dispatch({
+    type: "SYNC_WEEK",
+    payload: currentWeek
   })
 }
 
