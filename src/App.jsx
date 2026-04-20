@@ -5,7 +5,9 @@ import Analytics from "./pages/Analytics"
 import Calendar from "./pages/Calendar"
 import Notes from "./pages/Notes"
 import Settings from "./pages/Settings"
+import StopwatchPage from "./pages/Stopwatch"
 import { HabitProvider } from "./context/HabitContext"
+import { TimerProvider } from "./context/TimerContext"
 import { Menu } from "lucide-react"
 
 function App() {
@@ -14,6 +16,7 @@ function App() {
   const [openSidebar, setOpenSidebar] = useState(false)
 
   return (
+    <TimerProvider>
     <HabitProvider>
 
       <div className="min-h-screen bg-gradient-to-br from-primary-50 via-primary-100 to-black text-white">
@@ -51,6 +54,7 @@ function App() {
             {activePage === "analytics" && <Analytics />}
             {activePage === "calendar" && <Calendar />}
             {activePage === "notes" && <Notes />}
+            {activePage === "stopwatch" && <StopwatchPage />}
             {activePage === "settings" && <Settings />}
           </main>
 
@@ -59,6 +63,7 @@ function App() {
       </div>
 
     </HabitProvider>
+    </TimerProvider>
   )
 }
 

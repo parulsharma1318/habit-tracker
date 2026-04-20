@@ -4,7 +4,8 @@ import {
   Calendar, 
   BookOpen,
   Settings,
-  Flame 
+  Flame,
+  Clock
 } from 'lucide-react'
 
 const Sidebar = ({ activePage, setActivePage, openSidebar, setOpenSidebar }) => {
@@ -13,6 +14,7 @@ const Sidebar = ({ activePage, setActivePage, openSidebar, setOpenSidebar }) => 
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
     { id: 'calendar', label: 'Calendar', icon: Calendar },
     { id: 'notes', label: 'Notes', icon: BookOpen },
+    { id: 'stopwatch', label: 'Stopwatch', icon: Clock },
     { id: 'settings', label: 'Settings', icon: Settings },
   ]
 
