@@ -11,6 +11,7 @@ import {
 const Sidebar = ({ activePage, setActivePage, openSidebar, setOpenSidebar }) => {
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { id: 'stopwatch', label: 'Stopwatch', icon: Clock },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
     { id: 'calendar', label: 'Calendar', icon: Calendar },
     { id: 'notes', label: 'Notes', icon: BookOpen },
