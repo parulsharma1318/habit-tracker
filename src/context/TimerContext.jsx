@@ -8,28 +8,29 @@ const reducer = (state, action) => {
 
     case "RESET_ALL":
 
-  return {
-    ...state,
-    timers: state.timers.map(timer => ({
-      ...timer,
-      seconds: 0,
-      running: false
-    }))
-  }
+      return {
+        ...state,
+        timers: state.timers.map(timer => ({
+          ...timer,
+          seconds: 0,
+          running: false,
+          startTime: null
+        }))
+      }
 
-  case "EDIT_TIMER":
+    case "EDIT_TIMER":
 
-  return {
-    ...state,
-    timers: state.timers.map(timer =>
-      timer.id === action.payload.id
-        ? {
-            ...timer,
-            name: action.payload.name
-          }
-        : timer
-    )
-  }
+      return {
+        ...state,
+        timers: state.timers.map(timer =>
+          timer.id === action.payload.id
+            ? {
+                ...timer,
+                name: action.payload.name
+              }
+            : timer
+        )
+      }
 
     case "ADD_TIMER":
 
@@ -41,7 +42,8 @@ const reducer = (state, action) => {
             id: Date.now().toString(),
             name: action.payload,
             seconds: 0,
-            running: false
+            running: false,
+            startTime: null
           }
         ]
       }
@@ -81,71 +83,31 @@ export const TimerProvider = ({ children }) => {
 
   const getInitialState = () => {
 
-  try {
+    try {
 
-    const saved =
-      localStorage.getItem("timers")
+      const saved =
+        localStorage.getItem("timers")
 
-    if (saved) {
+      if (saved) {
 
-      return JSON.parse(saved)
+        return JSON.parse(saved)
 
-    }
+      }
 
-  } catch (error) {
+    } catch (error) {
 
-    console.log("Failed to load timers")
-
-  }
-
-  return {
-    timers: []
-  }
-
-}
-
-const [state, dispatch] =
-  useReducer(reducer, null, getInitialState)
-
-  useEffect(() => {
-
-    const saved =
-      localStorage.getItem("timers")
-
-    if (saved) {
-
-      dispatch({
-        type: "LOAD_DATA",
-        payload: JSON.parse(saved)
-      })
+      console.log("Failed to load timers")
 
     }
 
-  }, [])
-
-  useEffect(() => {
-
-  const handleUnload = () => {
-
-    localStorage.setItem(
-      "timers",
-      JSON.stringify(state)
-    )
+    return {
+      timers: []
+    }
 
   }
 
-  window.addEventListener(
-    "beforeunload",
-    handleUnload
-  )
-
-  return () =>
-    window.removeEventListener(
-      "beforeunload",
-      handleUnload
-    )
-
-}, [state])
+  const [state, dispatch] =
+    useReducer(reducer, null, getInitialState)
 
   useEffect(() => {
 
@@ -158,11 +120,11 @@ const [state, dispatch] =
 
   const resetAllTimers = () => {
 
-  dispatch({
-    type: "RESET_ALL"
-  })
+    dispatch({
+      type: "RESET_ALL"
+    })
 
-}
+  }
 
   const addTimer = (name) => {
 
@@ -193,15 +155,15 @@ const [state, dispatch] =
 
   const editTimer = (id, name) => {
 
-  dispatch({
-    type: "EDIT_TIMER",
-    payload: {
-      id,
-      name
-    }
-  })
+    dispatch({
+      type: "EDIT_TIMER",
+      payload: {
+        id,
+        name
+      }
+    })
 
-}
+  }
 
   return (
 

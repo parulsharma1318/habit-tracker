@@ -50,13 +50,23 @@ function App() {
 
           {/* MAIN CONTENT */}
           <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
-            {activePage === "dashboard" && <Dashboard />}
-            {activePage === "analytics" && <Analytics />}
-            {activePage === "calendar" && <Calendar />}
-            {activePage === "notes" && <Notes />}
-            {activePage === "stopwatch" && <StopwatchPage />}
-            {activePage === "settings" && <Settings />}
-          </main>
+
+  {activePage === "dashboard" && <Dashboard />}
+  {activePage === "analytics" && <Analytics />}
+  {activePage === "calendar" && <Calendar />}
+  {activePage === "notes" && <Notes />}
+  {activePage === "stopwatch" && <StopwatchPage />}
+  {activePage === "settings" && <Settings />}
+
+  {/* COPYRIGHT — SIMPLE */}
+
+  <div className="mt-10 pt-6 text-center text-sm text-gray-400 border-t border-white/10">
+
+    © {new Date().getFullYear()} HabitPro • Built with ❤️ by Parul Sharma
+
+  </div>
+
+</main>
 
         </div>
 
